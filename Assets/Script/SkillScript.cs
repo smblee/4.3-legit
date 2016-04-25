@@ -7,10 +7,10 @@ public class SkillScript : MonoBehaviour {
 	public float lifetime = 3.0f;
 	public bool slow = true;
 
-	public bool delayed = false;
+	public bool delayed = true;
 	public int healPoint = 10;
 
-	private float timeBorn ;
+	public float timeBorn ;
 
 	void OnTriggerStay2D(Collider2D other) {
 		if (other.tag != "Player" && other.tag != "Bullet" && other.tag!= "Skill"){

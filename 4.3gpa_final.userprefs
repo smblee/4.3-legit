@@ -1,9 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/SkillCooldownUI.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/PlayerAttacking.cs">
     <Files>
-      <File FileName="Assets/Script/PlayerAttacking.cs" Line="85" Column="1" />
-      <File FileName="Assets/SkillCooldownUI.cs" Line="21" Column="2" />
+      <File FileName="Assets/Script/SkillScript.cs" Line="14" Column="2" />
+      <File FileName="Assets/Script/PlayerAttacking.cs" Line="29" Column="15" />
+      <File FileName="Assets/SkillCooldownUI.cs" Line="30" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
