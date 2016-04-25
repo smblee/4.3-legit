@@ -9,11 +9,12 @@ public class UpgradeUI : MonoBehaviour {
 	public Text HealthText;
 	public Text SpeedText;
 	public Text NotEnoughText;
+	// must change the power of the prefab as well when changing power.
 	public Upgrade[] powerUpgrades = {new Upgrade(10,60),new Upgrade(15,80),new Upgrade(20,150),new Upgrade(30,200)};
 
-	public Upgrade[] healthUpgrades = {new Upgrade(100,50),new Upgrade(200,80),new Upgrade(300,120),new Upgrade(400,150),new Upgrade(600,200)};
+	public Upgrade[] healthUpgrades = {new Upgrade(100,50),new Upgrade(200,120),new Upgrade(300,200),new Upgrade(400,500),new Upgrade(600,1000),new Upgrade(1000,3000)};
 
-	public Upgrade[] speedUpgrades = {new Upgrade(1.0f,30),new Upgrade(1.2f,50),new Upgrade(1.5f,70),new Upgrade(2f,150),new Upgrade(2.5f,200)};
+	public Upgrade[] speedUpgrades = {new Upgrade(1.0f,30),new Upgrade(1.2f,50),new Upgrade(1.5f,70),new Upgrade(2f,200),new Upgrade(2.5f,1000)};
 	private int[] curUpgrades = { 0, 0, 0 };
 
 	private int[] skillPrices = { 50, 100, 200, 500 };
@@ -117,8 +118,6 @@ public class UpgradeUI : MonoBehaviour {
 			GameMaster.gm.increaseMoney (powerUpgrades [curUpgrades [0]].price * -1);
 			playerWeapon.SwitchWeapon (curUpgrades [0]);
 			curUpgrades [0]++;
-			if (curUpgrades [0] > powerUpgrades.Length - 1)
-				return -1;
 			break;
 
 		// health
