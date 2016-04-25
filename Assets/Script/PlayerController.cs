@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
 				audioManager.PlaySound ("PlayerHit");
 				camShake.Shake (camShakeAmt, 0.05f);
 				stats.curHealth -= damage;
-				if (statusIndicator != null && ! invul) {
+				if (statusIndicator != null && ! invul && stats.curHealth > 0) {
 					TriggerDamageBlinker (hurtTime);
 					statusIndicator.SetHealth (stats.curHealth, stats.maxHealth);
 				}
@@ -110,8 +110,8 @@ public class PlayerController : MonoBehaviour
 		StartCoroutine (DamageBlinker (hurtTime));
 	}
 
-	public void HealPlayer(float amt) {
-		stats.curHealth += amt;
+	public void HealPlayer() {
+		stats.curHealth += stats.maxHealth / 10;
 		statusIndicator.SetHealth (stats.curHealth, stats.maxHealth);
 	}
 

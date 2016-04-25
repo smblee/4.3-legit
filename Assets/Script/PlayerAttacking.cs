@@ -82,7 +82,7 @@ public class PlayerAttacking : MonoBehaviour {
 				skillPf_heal = Instantiate(skill.getCurrentSkill(index), transform.position, transform.rotation) as GameObject;
 				_cd = skillPf_heal.gameObject.GetComponent<SkillScript> ().cd;
 				cdUI.showCD (index - 1, _cd);
-				pc.HealPlayer(skillPf_heal.GetComponent<SkillScript> ().healPoint);
+				pc.HealPlayer();
 				_lifetime = skillPf_heal.gameObject.GetComponent<SkillScript> ().lifetime;
 				audioManager.PlaySound ("Skill" + index, _lifetime);
 				cd_skill[index-1]= Time.time + _cd;

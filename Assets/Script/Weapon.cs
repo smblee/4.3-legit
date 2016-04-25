@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Input.GetKeyDown (KeyCode.Z)) {
+		/*if (Input.GetKeyDown (KeyCode.Z)) {
 			currentWeapon = (currentWeapon >= weapons.Length-1) ? 0 : currentWeapon + 1;
 			if (currentWeapon == 4) {
 				sound = "Bullet4";
@@ -21,7 +21,7 @@ public class Weapon : MonoBehaviour {
 			}
 			//SwitchWeapon (currentWeapon);
 		}
-
+*/
 	}
 	public GameObject getCurrentWeapon() {
 		return weapons [currentWeapon]; 

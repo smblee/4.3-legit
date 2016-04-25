@@ -8,7 +8,6 @@ public class SkillScript : MonoBehaviour {
 	public bool slow = true;
 
 	public bool delayed = true;
-	public int healPoint = 10;
 
 	public float timeBorn ;
 

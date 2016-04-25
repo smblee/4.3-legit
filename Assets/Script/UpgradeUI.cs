@@ -158,6 +158,7 @@ public class UpgradeUI : MonoBehaviour {
 	}
 	public void BuySkill (int skillIndex) {
 		// if you have enough money, purchase
+		audioManager.PlaySound ("ButtonClick");
 		Color c;
 		if (GameMaster.gm.getMoney() >= skillPrices [skillIndex]) {
 			playerAtk.addSkill (skillIndex + 1);
