@@ -14,12 +14,23 @@ public class UpgradeUI : MonoBehaviour {
 	public Upgrade[] healthUpgrades = {new Upgrade(100,50),new Upgrade(200,80),new Upgrade(300,120),new Upgrade(400,150),new Upgrade(600,200)};
 
 	public Upgrade[] speedUpgrades = {new Upgrade(1.0f,30),new Upgrade(1.2f,50),new Upgrade(1.5f,70),new Upgrade(2f,150),new Upgrade(2.5f,200)};
-
 	private int[] curUpgrades = { 0, 0, 0 };
+
+	private int[] skillPrices = { 50, 100, 200, 500 };
+	public Button skill1btn;
+	public Button skill2btn;
+	public Button skill3btn;
+	public Button skill4btn;
+	public Text skill1key;
+	public Text skill2key;
+	public Text skill3key;
+	public Text skill4key;
+
 	private AudioManager audioManager;
-	public PlayerController player;
-	public Weapon playerWeapon;
-	public PlayerAttacking playerAtk;
+
+	private PlayerController player;
+	private Weapon playerWeapon;
+	private PlayerAttacking playerAtk;
 
 	public class Upgrade {
 		public float amt;
@@ -145,7 +156,51 @@ public class UpgradeUI : MonoBehaviour {
 		}
 		return 1;
 	}
-	int BuySkills (int skillIndex) {
-		return 0;
+	public void BuySkill (int skillIndex) {
+		// if you have enough money, purchase
+		Color c;
+		if (GameMaster.gm.getMoney() >= skillPrices [skillIndex]) {
+			playerAtk.addSkill (skillIndex + 1);
+			GameMaster.gm.increaseMoney (skillPrices [skillIndex] * -1);
+			NotEnoughText.text = "";
+			switch (skillIndex) {
+			case 0:
+				skill1btn.interactable = false;
+				skill1btn.gameObject.GetComponentInChildren<Text> ().text = "purchased";
+				c = skill1key.color; 
+				c.a = 255f;
+				skill1key.color = c;
+				break;
+			case 1:
+				skill2btn.interactable = false;
+				skill2btn.gameObject.GetComponentInChildren<Text>().text = "purchased";
+				c = skill2key.color; 
+				c.a = 255f;
+				skill2key.color = c;
+				break;
+			case 2:
+				skill3btn.interactable = false;
+				skill3btn.gameObject.GetComponentInChildren<Text>().text = "purchased";
+				c = skill3key.color; 
+				c.a = 255f;
+				skill3key.color = c;
+
+				break;
+			case 3:
+				skill4btn.interactable = false;
+				skill4btn.gameObject.GetComponentInChildren<Text>().text = "purchased";
+				c = skill4key.color; 
+				c.a = 255f;
+				skill4key.color = c;
+
+				break;
+			default:
+				break;
+			}
+
+		} else {
+			NotEnoughText.text = "Not enough H-Points";
+		}
 	}
+
 }

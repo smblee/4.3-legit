@@ -10,7 +10,7 @@ public class GameMaster : MonoBehaviour {
 	[SerializeField]
 	private GameObject upgradeMenu;
 
-	private int startingMoney = 0;
+	public int startingMoney = 0;
 	public static int Money;
 
 	public delegate void upgradeMenuCallBack(bool active);

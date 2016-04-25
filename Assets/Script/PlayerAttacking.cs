@@ -23,10 +23,6 @@ public class PlayerAttacking : MonoBehaviour {
 		weapon = transform.FindChild ("Weapon").GetComponent<Weapon>();
 		skill = transform.FindChild ("Skill").GetComponent<Skill>();
 		pc = transform.GetComponent<PlayerController> ();
-		addSkill(1);
-		addSkill(2);
-		addSkill(3);
-		addSkill(4);
 	}
 
 	// Update is called once per frame
@@ -86,9 +82,9 @@ public class PlayerAttacking : MonoBehaviour {
 				skillPf_heal = Instantiate(skill.getCurrentSkill(index), transform.position, transform.rotation) as GameObject;
 				_cd = skillPf_heal.gameObject.GetComponent<SkillScript> ().cd;
 				cdUI.showCD (index - 1, _cd);
-				audioManager.PlaySound ("Skill" + index, _cd-1f);
 				pc.HealPlayer(skillPf_heal.GetComponent<SkillScript> ().healPoint);
 				_lifetime = skillPf_heal.gameObject.GetComponent<SkillScript> ().lifetime;
+				audioManager.PlaySound ("Skill" + index, _lifetime);
 				cd_skill[index-1]= Time.time + _cd;
 				Destroy(skillPf_heal, _lifetime);
 				break;
@@ -98,7 +94,7 @@ public class PlayerAttacking : MonoBehaviour {
 				_lifetime = skillPf.gameObject.GetComponent<SkillScript> ().lifetime;
 				_cd = skillPf.gameObject.GetComponent<SkillScript> ().cd;
 				cdUI.showCD (index - 1, _cd);
-				audioManager.PlaySound ("Skill" + index, _cd);
+				audioManager.PlaySound ("Skill" + index, _lifetime);
 				cd_skill[index-1]= Time.time + _cd;
 				Destroy(skillPf, _lifetime);
 				break;		
@@ -137,7 +133,7 @@ public class PlayerAttacking : MonoBehaviour {
 				_lifetime = skillPf.gameObject.GetComponent<SkillScript> ().lifetime;
 				_cd = skillPf.gameObject.GetComponent<SkillScript> ().cd;
 				cdUI.showCD (index - 1, _cd);
-				audioManager.PlaySound ("Skill" + index, _cd);
+				audioManager.PlaySound ("Skill" + index);
 				cd_skill[index-1]= Time.time + _cd;
 				Destroy(skillPf, _lifetime);
 				break;		
@@ -146,14 +142,14 @@ public class PlayerAttacking : MonoBehaviour {
 				_lifetime = skillPf.gameObject.GetComponent<SkillScript> ().lifetime;
 				_cd = skillPf.gameObject.GetComponent<SkillScript> ().cd;
 				cdUI.showCD (index - 1, _cd);
-				audioManager.PlaySound ("Skill" + index, _cd);
+				audioManager.PlaySound ("Skill" + index, _lifetime);
 				cd_skill[index-1]= Time.time + _cd;
 				Destroy(skillPf, _lifetime);
 				break;
 		}
 	}
 
-	void addSkill(int index){
+	public void addSkill(int index){
 		skill_owned[index-1] = true;
 		cd_skill[index-1] = 0;
 		cdUI.addSkillUI (index-1);
