@@ -77,7 +77,7 @@ public class PlayerAttacking : MonoBehaviour {
 	}
 
 	void Skill(int index){
-		//cdUI.showCD(index-1, 
+		cdUI.showCD (index - 1);
 		//If the skill is healing
 		if (index==2){
 			skillPf_heal = Instantiate(skill.getCurrentSkill(index), transform.position, transform.rotation) as GameObject;
@@ -109,6 +109,7 @@ public class PlayerAttacking : MonoBehaviour {
 	void addSkill(int index){
 		skill_owned[index-1] = true;
 		cd_skill[index-1] = 0;
+		cdUI.addSkillUI (index-1);
 	}
 
 }
