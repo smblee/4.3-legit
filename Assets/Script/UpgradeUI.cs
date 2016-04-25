@@ -19,6 +19,7 @@ public class UpgradeUI : MonoBehaviour {
 	private AudioManager audioManager;
 	public PlayerController player;
 	public Weapon playerWeapon;
+	public PlayerAttacking playerAtk;
 
 	public class Upgrade {
 		public float amt;
@@ -33,6 +34,7 @@ public class UpgradeUI : MonoBehaviour {
 		audioManager = AudioManager.instance;
 		player = GameObject.Find ("nerdyguy").gameObject.GetComponent<PlayerController>();
 		playerWeapon = GameObject.Find ("nerdyguy").gameObject.GetComponentInChildren<Weapon>();
+		playerAtk = GameObject.Find ("nerdyguy").gameObject.GetComponentInChildren<PlayerAttacking> ();
 	}
 	void Awake() {
 
@@ -142,5 +144,8 @@ public class UpgradeUI : MonoBehaviour {
 			break;
 		}
 		return 1;
+	}
+	int BuySkills (int skillIndex) {
+		return 0;
 	}
 }
