@@ -94,16 +94,18 @@ public class UpgradeUI : MonoBehaviour {
 		// power
 		case 0:
 			// check if at final upgrade
-			if (curUpgrades[0] > powerUpgrades.Length - 1) {
+			if (curUpgrades [0] > powerUpgrades.Length - 1) {
 				return -1;
 			}
 			// check if not enough money
-			else if (powerUpgrades [curUpgrades[0]].price > GameMaster.gm.getMoney()) {
+			else if (powerUpgrades [curUpgrades [0]].price > GameMaster.gm.getMoney ()) {
 				return 0;
 			}
-			GameMaster.gm.increaseMoney (powerUpgrades [curUpgrades[0]].price * -1);
-			playerWeapon.SwitchWeapon (curUpgrades[0]);
-			curUpgrades[0]++;
+			GameMaster.gm.increaseMoney (powerUpgrades [curUpgrades [0]].price * -1);
+			playerWeapon.SwitchWeapon (curUpgrades [0]);
+			curUpgrades [0]++;
+			if (curUpgrades [0] > powerUpgrades.Length - 1)
+				return -1;
 			break;
 
 		// health
