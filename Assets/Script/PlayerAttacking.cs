@@ -9,6 +9,8 @@ public class PlayerAttacking : MonoBehaviour {
 	private bool[] skill_owned ={false,false,false};
 	private GameObject skillPf_heal;
 	private GameObject skillPf;
+	[SerializeField]
+	private SkillCooldownUI cdUI; 
 
 	private Vector3 lastPosition = new Vector3(0,1,0);
 	private AudioManager audioManager;
@@ -75,6 +77,7 @@ public class PlayerAttacking : MonoBehaviour {
 	}
 
 	void Skill(int index){
+		//cdUI.showCD(index-1, 
 		//If the skill is healing
 		if (index==2){
 			skillPf_heal = Instantiate(skill.getCurrentSkill(index), transform.position, transform.rotation) as GameObject;
