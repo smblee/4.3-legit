@@ -5,6 +5,7 @@ public class SkillCooldownUI : MonoBehaviour {
 	public class SkillInfo {
 		public float cd;
 		//public Image skillIcon;
+
 		[HideInInspector]
 		public float currentcd;
 	}
@@ -22,8 +23,9 @@ public class SkillCooldownUI : MonoBehaviour {
 	void showSkillIcon(int skillIndex) {
 	
 	}
-
+		
 	void showCD(int skillIndex){
 	
 	}
+
 }

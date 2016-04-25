@@ -7,6 +7,7 @@ public class PlayerAttacking : MonoBehaviour {
 	public Skill skill;
 	private float[] cd_skill={-1.0f,-1.0f,-1.0f,-1.0f};
 	private bool[] skill_owned ={false,false,false,false};
+
 	private GameObject skillPf_heal;
 	private GameObject skillPf;
 	[SerializeField]
@@ -15,7 +16,6 @@ public class PlayerAttacking : MonoBehaviour {
 	private Vector3 lastPosition = new Vector3(0,1,0);
 	private AudioManager audioManager;
 	private PlayerController pc;
-	private Rigidbody2D rbody;
 
 
 	void Start () {
@@ -27,7 +27,6 @@ public class PlayerAttacking : MonoBehaviour {
 		addSkill(2);
 		addSkill(3);
 		addSkill(4);
-		rbody = GetComponent<Rigidbody2D> ();
 	}
 
 	// Update is called once per frame
@@ -150,7 +149,6 @@ public class PlayerAttacking : MonoBehaviour {
 				cd_skill[index-1]= Time.time + _cd;
 				Destroy(skillPf, _lifetime);
 				break;
-
 		}
 	}
 
