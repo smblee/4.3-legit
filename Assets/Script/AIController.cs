@@ -25,7 +25,9 @@ public class AIController: MonoBehaviour
 	private float speed_d = 0f;
 
 	private float _cd = 0.1f;
+	private float _cd_forever = 1f;
 	private float skillCD = 0;
+	private float skillCD2 = 0;
 	private Vector3 Player;
 	private Vector2 PlayerDirection;
 	private float xdif;
@@ -63,18 +65,6 @@ public class AIController: MonoBehaviour
 					statusIndicator.SetHealth (stats.curHealth, stats.maxHealth);
 				}
 			}
-			if (other.tag == "Ultra"){
-				if (Time.time >= skillCD){
-					float damage = other.gameObject.GetComponent<SkillScript> ().damage;
-
-					stats.curHealth -= damage;
-					skillCD = Time.time + _cd;
-					audioManager.PlaySound ("Hit");
-					if (statusIndicator != null) {
-						statusIndicator.SetHealth (stats.curHealth, stats.maxHealth);
-					}
-				}
-			}
 			checkDeath();
 		}
 	}
@@ -84,6 +74,21 @@ public class AIController: MonoBehaviour
 			if (other.tag == "Skill") {
 				if (other.gameObject.GetComponent<SkillScript> ().slow)
 					speed = speed_d;
+				if (other.gameObject.GetComponent<SkillScript> ().delayed)
+				{
+					if (Time.time - other.gameObject.GetComponent<SkillScript> ().timeBorn > 2){
+						if (Time.time >= skillCD2){
+							float damage = other.gameObject.GetComponent<SkillScript> ().damage;
+							stats.curHealth -= damage;
+							skillCD2 = Time.time + _cd_forever;
+							audioManager.PlaySound ("Hit");
+							if (statusIndicator != null) {
+								statusIndicator.SetHealth (stats.curHealth, stats.maxHealth);
+							}
+						}
+					}
+				}
+				else
 				if (Time.time >= skillCD){
 					float damage = other.gameObject.GetComponent<SkillScript> ().damage;
 

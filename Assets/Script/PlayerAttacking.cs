@@ -5,8 +5,9 @@ public class PlayerAttacking : MonoBehaviour {
 	private float cd;
 	public Weapon weapon;
 	public Skill skill;
-	private float[] cd_skill={-1.0f,-1.0f,-1.0f};
-	private bool[] skill_owned ={false,false,false};
+	private float[] cd_skill={-1.0f,-1.0f,-1.0f,-1.0f};
+	private bool[] skill_owned ={false,false,false,false};
+
 	private GameObject skillPf_heal;
 	private GameObject skillPf;
 	[SerializeField]
@@ -17,7 +18,6 @@ public class PlayerAttacking : MonoBehaviour {
 	private PlayerController pc;
 
 
-
 	void Start () {
 		audioManager = AudioManager.instance;
 		weapon = transform.FindChild ("Weapon").GetComponent<Weapon>();
@@ -26,6 +26,7 @@ public class PlayerAttacking : MonoBehaviour {
 		addSkill(1);
 		addSkill(2);
 		addSkill(3);
+		addSkill(4);
 	}
 
 	// Update is called once per frame
@@ -77,32 +78,78 @@ public class PlayerAttacking : MonoBehaviour {
 	}
 
 	void Skill(int index){
-		cdUI.showCD (index - 1);
+		float _cd, _lifetime;
+		Vector2 pos;
 		//If the skill is healing
-		if (index==2){
-			skillPf_heal = Instantiate(skill.getCurrentSkill(index), transform.position, transform.rotation) as GameObject;
-			float _cd = skillPf_heal.gameObject.GetComponent<SkillScript> ().cd;
-			audioManager.PlaySound ("Skill" + index, _cd-1f);
-			pc.HealPlayer(skillPf_heal.GetComponent<SkillScript> ().healPoint);
-			float _lifetime = skillPf_heal.gameObject.GetComponent<SkillScript> ().lifetime;
-
-			cd_skill[index-1]= Time.time + _cd;
-			Destroy(skillPf_heal, _lifetime);
-		}
-		else{
-			if (index==3){
-				Vector3 pos = new Vector3(0, 0, 0);
-				skillPf = Instantiate(skill.getCurrentSkill(index), pos, transform.rotation) as GameObject;			
-			}
-			else{
+		switch (index){
+			case 2:
+				skillPf_heal = Instantiate(skill.getCurrentSkill(index), transform.position, transform.rotation) as GameObject;
+				_cd = skillPf_heal.gameObject.GetComponent<SkillScript> ().cd;
+				cdUI.showCD (index - 1, _cd);
+				audioManager.PlaySound ("Skill" + index, _cd-1f);
+				pc.HealPlayer(skillPf_heal.GetComponent<SkillScript> ().healPoint);
+				_lifetime = skillPf_heal.gameObject.GetComponent<SkillScript> ().lifetime;
+				cd_skill[index-1]= Time.time + _cd;
+				Destroy(skillPf_heal, _lifetime);
+				break;
+			case 4:
+				pos = new Vector2(0, 0);
+				skillPf = Instantiate(skill.getCurrentSkill(index), pos, transform.rotation) as GameObject;	
+				_lifetime = skillPf.gameObject.GetComponent<SkillScript> ().lifetime;
+				_cd = skillPf.gameObject.GetComponent<SkillScript> ().cd;
+				cdUI.showCD (index - 1, _cd);
+				audioManager.PlaySound ("Skill" + index, _cd);
+				cd_skill[index-1]= Time.time + _cd;
+				Destroy(skillPf, _lifetime);
+				break;		
+			case 3:
 				
+				//upwards
+				if (lastPosition.x == 0 && lastPosition.y > 0)
+					pos = new Vector2(transform.position.x, transform.position.y+2);
+				else if (lastPosition.x == 0 && lastPosition.y < 0) //downwards
+					pos = new Vector2(transform.position.x, transform.position.y-2);
+				else if (lastPosition.x > 0 && lastPosition.y > 0 ) //right up
+					pos = new Vector2(transform.position.x+2, transform.position.y+2);
+				else if (lastPosition.x > 0 && lastPosition.y < 0 ) //right down
+					pos = new Vector2(transform.position.x+2, transform.position.y-2);
+				else if (lastPosition.x < 0 && lastPosition.y > 0 ) //left up
+					pos = new Vector2(transform.position.x-2, transform.position.y+2);
+				else if (lastPosition.x < 0 && lastPosition.y < 0 ) //left down
+					pos = new Vector2(transform.position.x-2, transform.position.y-2);
+				else if (lastPosition.x > 0 && lastPosition.y == 0 ) //right
+					pos = new Vector2(transform.position.x+2, transform.position.y);
+				else if (lastPosition.x < 0 && lastPosition.y == 0 ) //left
+					pos = new Vector2(transform.position.x-2, transform.position.y);
+				else 
+					pos = new Vector2(0 ,0);
+
+				if (pos.x > 4.6f)
+					pos.x = 4.6f;
+				if (pos.x < -4.6f)
+					pos.x = -4.6f;
+				if (pos.y > 3.56f)
+					pos.y = 3.56f;
+				if (pos.y < -3.56f)
+					pos.y = -3.56f;
+
+				skillPf = Instantiate(skill.getCurrentSkill(index), pos, transform.rotation) as GameObject;	
+				_lifetime = skillPf.gameObject.GetComponent<SkillScript> ().lifetime;
+				_cd = skillPf.gameObject.GetComponent<SkillScript> ().cd;
+				cdUI.showCD (index - 1, _cd);
+				audioManager.PlaySound ("Skill" + index, _cd);
+				cd_skill[index-1]= Time.time + _cd;
+				Destroy(skillPf, _lifetime);
+				break;		
+			default:
 				skillPf = Instantiate(skill.getCurrentSkill(index), transform.position, transform.rotation) as GameObject;			
-			}
-			float _lifetime = skillPf.gameObject.GetComponent<SkillScript> ().lifetime;
-			float _cd = skillPf.gameObject.GetComponent<SkillScript> ().cd;
-			audioManager.PlaySound ("Skill" + index, _cd);
-			cd_skill[index-1]= Time.time + _cd;
-			Destroy(skillPf, _lifetime);
+				_lifetime = skillPf.gameObject.GetComponent<SkillScript> ().lifetime;
+				_cd = skillPf.gameObject.GetComponent<SkillScript> ().cd;
+				cdUI.showCD (index - 1, _cd);
+				audioManager.PlaySound ("Skill" + index, _cd);
+				cd_skill[index-1]= Time.time + _cd;
+				Destroy(skillPf, _lifetime);
+				break;
 		}
 	}
 

@@ -30,20 +30,18 @@ public class SkillCooldownUI : MonoBehaviour {
 			}
 		}
 	}
-
 	void showSkillIcon(int skillIndex) {
-	
+		
 	}
 
-	public void showCD(int skillIndex) {
-		if (skills.ElementAtOrDefault (skillIndex) == null) {
-		}
+	public void showCD(int skillIndex, float cd) {
+		Debug.Log ("ult" + cd);
+		skills [skillIndex].cd = cd;
 		skills [skillIndex].currentcd = 0;
 	}
 
 	public void addSkillUI (int skillIndex) {
-		skills [skillIndex].skillIcon.enabled = false;
+		Debug.Log (skills [skillIndex].skillIcon.enabled);
+		skills [skillIndex].skillIcon.enabled = true;
 	}
-
-
 }
