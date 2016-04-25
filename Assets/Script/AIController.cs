@@ -28,6 +28,7 @@ public class AIController: MonoBehaviour
 	private float _cd_forever = 1f;
 	private float skillCD = 0;
 	private float skillCD2 = 0;
+	private float skillCD_ultra = 0;
 	private Vector3 Player;
 	private Vector2 PlayerDirection;
 	private float xdif;
@@ -94,6 +95,18 @@ public class AIController: MonoBehaviour
 
 					stats.curHealth -= damage;
 					skillCD = Time.time + _cd;
+					audioManager.PlaySound ("Hit");
+					if (statusIndicator != null) {
+						statusIndicator.SetHealth (stats.curHealth, stats.maxHealth);
+					}
+				}
+			}else
+			if (other.tag == "Ultra"){
+				if (Time.time >= skillCD_ultra){
+					float damage = other.gameObject.GetComponent<SkillScript> ().damage;
+
+					stats.curHealth -= damage;
+					skillCD_ultra = Time.time + _cd;
 					audioManager.PlaySound ("Hit");
 					if (statusIndicator != null) {
 						statusIndicator.SetHealth (stats.curHealth, stats.maxHealth);
