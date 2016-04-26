@@ -78,6 +78,7 @@ public class WaveSpawner : MonoBehaviour {
 	{
 		if (state == SpawnState.WAITING)
 		{
+			Debug.Log ("PRINTWAITING");
 			if (!EnemyIsAlive())
 			{
 				audioManager.PlaySound ("LevelNotification");
@@ -138,6 +139,7 @@ public class WaveSpawner : MonoBehaviour {
 			searchCountdown = 1f;
 			if (GameObject.FindGameObjectWithTag("Enemy") == null)
 			{
+				
 				return false;
 			}
 		}

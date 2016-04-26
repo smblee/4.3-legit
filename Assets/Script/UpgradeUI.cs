@@ -14,7 +14,7 @@ public class UpgradeUI : MonoBehaviour {
 
 	public Upgrade[] healthUpgrades = {new Upgrade(100,50),new Upgrade(200,120),new Upgrade(300,200),new Upgrade(400,500),new Upgrade(600,1000),new Upgrade(1000,3000)};
 
-	public Upgrade[] speedUpgrades = {new Upgrade(1.0f,30),new Upgrade(1.2f,50),new Upgrade(1.5f,70),new Upgrade(2f,200),new Upgrade(2.5f,1000)};
+	public Upgrade[] speedUpgrades = {new Upgrade(1.5f,30),new Upgrade(1.7f,50),new Upgrade(1.9f,70),new Upgrade(2.2f,200),new Upgrade(2.5f,1000)};
 	private int[] curUpgrades = { 0, 0, 0 };
 
 	private int[] skillPrices = { 50, 100, 200, 500 };
